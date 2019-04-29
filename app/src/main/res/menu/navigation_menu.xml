@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_songs"
+        android:icon="@drawable/music_tab_icon_all_press"
+        android:title="Tracks"
+        android:titleCondensed="string" />
+
+    <item
+        android:id="@+id/item_albums"
+        android:icon="@drawable/music_tab_icon_albums_press"
+        android:title="Albums"
+        android:titleCondensed="string" />
+
+    <item
+        android:id="@+id/item_artists"
+        android:icon="@drawable/music_tab_icon_artists_press"
+        android:title="Artists"
+        android:titleCondensed="string" />
+
+    <item
+        android:id="@+id/item_genres"
+        android:icon="@drawable/music_tab_icon_genres_press"
+        android:title="Genres"
+        android:titleCondensed="string" />
+
+    <item
+        android:id="@+id/item_playlists"
+        android:icon="@drawable/music_tab_icon_playlists_press"
+        android:title="Playlists"
+        android:titleCondensed="string" />
+
+</menu>
