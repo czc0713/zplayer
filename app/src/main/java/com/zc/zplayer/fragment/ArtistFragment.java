@@ -12,11 +12,8 @@ import android.view.ViewGroup;
 
 import com.zc.zplayer.R;
 import com.zc.zplayer.adapter.ArtistAdapter;
-import com.zc.zplayer.adapter.SongAdapter;
 import com.zc.zplayer.loader.ArtistLoader;
-import com.zc.zplayer.loader.SongLoader;
 import com.zc.zplayer.model.Artist;
-import com.zc.zplayer.model.Song;
 
 import java.util.ArrayList;
 
@@ -43,5 +40,4 @@ public class ArtistFragment extends Fragment {
         artistListView.setAdapter(adapter);
         return view;
     }
-
 }

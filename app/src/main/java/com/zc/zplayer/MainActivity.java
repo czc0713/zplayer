@@ -13,7 +13,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +29,6 @@ import com.zc.zplayer.model.Song;
 import com.zc.zplayer.service.MediaPlayerService;
 import com.zc.zplayer.util.StorageUtil;
 
-
-import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends ServiceActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +37,6 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     private ViewPager viewPager;
     private TabAdapter tabAdapter;
     private MenuItem prevMenuItem;
-    private LayoutInflater inflater;
     private StorageUtil storageUtil;
     // Music Controller Views
     private ImageButton mPauseButton;
@@ -50,11 +45,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     private TextView mSongTitle;
     private TextView mArtistTitle;
     private CircleImageView mImage;
-
-    private int audioIndex;
-    private ArrayList<Song> audioList;
     private Song audioSong;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

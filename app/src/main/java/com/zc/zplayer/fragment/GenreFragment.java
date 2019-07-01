@@ -11,11 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zc.zplayer.R;
-import com.zc.zplayer.adapter.ArtistAdapter;
 import com.zc.zplayer.adapter.GenreAdapter;
-import com.zc.zplayer.loader.ArtistLoader;
 import com.zc.zplayer.loader.GenreLoader;
-import com.zc.zplayer.model.Artist;
 import com.zc.zplayer.model.Genre;
 
 import java.util.ArrayList;
@@ -43,5 +40,4 @@ public class GenreFragment extends Fragment {
         genreListView.setAdapter(adapter);
         return view;
     }
-
 }

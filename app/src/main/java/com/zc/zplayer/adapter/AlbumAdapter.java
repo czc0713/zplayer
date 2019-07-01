@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,6 +20,7 @@ import com.zc.zplayer.loader.SongLoader;
 import com.zc.zplayer.model.Album;
 import com.zc.zplayer.model.SongList;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -29,14 +31,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     private Context context;
     private List<Album> albumList;
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public AlbumAdapter(Context context, List<Album> albumList) {
         this.context = context;
         this.albumList = albumList;
@@ -45,6 +39,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public AlbumAdapter(Context context, List<Album> albumList, boolean isDark) {
         this.context = context;
         this.albumList = albumList;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @NonNull
@@ -86,8 +88,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         albumViewHolder.albumTitleText.setText(albumList.get(i).getAlbumTitle());
         albumViewHolder.albumArtistText.setText(albumList.get(i).getAlbumArtist());
         albumViewHolder.container.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale));
+
         Glide.with(view)
                 .load(albumList.get(i).getAlbumID())
+                .placeholder(R.drawable.music_default_cover_img)
                 .apply(RequestOptions.skipMemoryCacheOf(true))
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(albumViewHolder.albumImage);
@@ -98,7 +102,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         return albumList.size();
     }
 
-    public class AlbumViewHolder extends RecyclerView.ViewHolder{
+    public class AlbumViewHolder extends RecyclerView.ViewHolder {
 
         private TextView albumTitleText;
         private TextView albumArtistText;
