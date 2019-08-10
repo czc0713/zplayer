@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
@@ -19,6 +20,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.zc.zplayer.emitter.AudioEmitter;
 import com.zc.zplayer.fragment.AlbumFragment;
 import com.zc.zplayer.fragment.ArtistFragment;
@@ -47,11 +50,18 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     private TextView mSongTitle;
     private TextView mArtistTitle;
     private CircleImageView mImage;
+    private ConstraintLayout controllerLayout;
     private Song audioSong;
+    private RefWatcher refWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        // Normal app init code...
+        refWatcher = LeakCanary.install(getApplication());
         checkPermissions();
         checkSavedSettings();
         super.onCreate(savedInstanceState);
@@ -62,6 +72,11 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         registerReceivers();
         LocalBroadcastManager.getInstance(this).registerReceiver(mAudioReceiver,
                 new IntentFilter(NOW_PLAYING));
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        MainActivity application = (MainActivity) context.getApplicationContext();
+        return application.refWatcher;
     }
 
     @Override
@@ -182,9 +197,11 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
 
             }
         });
+//        checkSavedSong();
     }
 
     private void initializeController(){
+        controllerLayout = findViewById(R.id.controller_layout);
         mSongTitle = findViewById(R.id.controller_song_title);
         mArtistTitle = findViewById(R.id.controller_song_artist);
         mImage = findViewById(R.id.controller_song_art);
@@ -223,21 +240,26 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SongActivity.class);
-                boolean isPlaying = playerService.isPlaying();
-                intent.putExtra("isPlaying", isPlaying);
-                startActivity(intent);
+                if (playerService.getActiveAudio() != null){
+                    Intent intent = new Intent(getApplicationContext(), SongActivity.class);
+                    boolean isPlaying = playerService.isPlaying();
+                    intent.putExtra("isPlaying", isPlaying);
+                    startActivity(intent);
+                }
             }
         });
+        checkSavedSong();
     }
 
     private void updateControllerView(Song song){
-        mSongTitle.setText(song.getSongTitle());
-        mArtistTitle.setText(song.getSongArtist());
-        Glide.with(getApplicationContext())
-                .load(song.getAlbumArt())
-                .placeholder(R.drawable.ic_default_music)
-                .into(mImage);
+        if (song != null) {
+            mSongTitle.setText(song.getSongTitle());
+            mArtistTitle.setText(song.getSongArtist());
+            Glide.with(getApplicationContext())
+                    .load(song.getAlbumArt())
+                    .placeholder(R.drawable.ic_default_music)
+                    .into(mImage);
+        }
     }
 
     @Override

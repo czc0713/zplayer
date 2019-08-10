@@ -75,7 +75,7 @@ public class MediaPlayerService extends Service implements
 
     // Binder given to clients
     private final IBinder iBinder = (IBinder) new LocalBinder();
-    private StorageUtil storageUtil;
+    private StorageUtil storage;
 
     //Becoming noisy
     private BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
@@ -91,10 +91,11 @@ public class MediaPlayerService extends Service implements
         @Override
         public void onReceive(Context context, Intent intent) {
             //Get the new media index form SharedPreferences
-            audioIndex = new StorageUtil(getApplicationContext()).loadAudioIndex();
+            audioIndex = storage.loadAudioIndex();
             if (audioIndex != -1 && audioIndex < audioList.size()) {
                 //index is in a valid range
                 activeAudio = audioList.get(audioIndex);
+                storage.storeAudio(activeAudio);
             } else {
                 stopSelf();
             }
@@ -120,10 +121,10 @@ public class MediaPlayerService extends Service implements
         }
     };
 
-
     @Override
     public void onCreate() {
         super.onCreate();
+        storage = new StorageUtil(getApplicationContext());
         callStateListener();
         registerReceivers();
     }
@@ -303,7 +304,6 @@ public class MediaPlayerService extends Service implements
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
             //Load data from SharedPreferences
-            StorageUtil storage = new StorageUtil(getApplicationContext());
             audioList = storage.loadAudioList();
             audioIndex = storage.loadAudioIndex();
 
@@ -428,7 +428,7 @@ public class MediaPlayerService extends Service implements
             activeAudio = audioList.get(++audioIndex);
         }
         //Update stored index
-        new StorageUtil(getApplicationContext()).storeAudioIndex(audioIndex);
+        storage.storeAudioIndex(audioIndex);
         stopMedia();
         player.reset();
         initMediaPlayer();
@@ -446,7 +446,7 @@ public class MediaPlayerService extends Service implements
         }
 
         //Update stored index
-        new StorageUtil(getApplicationContext()).storeAudioIndex(audioIndex);
+        storage.storeAudioIndex(audioIndex);
 
         stopMedia();
         //reset player
@@ -473,6 +473,7 @@ public class MediaPlayerService extends Service implements
                         .setShowActionsInCompactView(0, 1, 2))
                 .setColor(getResources().getColor(R.color.colorPrimary))
                 .setOnlyAlertOnce(true)
+                .setOngoing(true)
                 .setSmallIcon(android.R.drawable.stat_sys_headset)
                 .setContentText(activeAudio.getSongArtist())
                 .setContentTitle(activeAudio.getSongTitle())
@@ -570,7 +571,7 @@ public class MediaPlayerService extends Service implements
         }
         catch (Exception e){ }
         //clear cached playlist
-        new StorageUtil(getApplicationContext()).clearCachedAudioPlaylist();
+        storage.clearCachedAudioPlaylist();
     }
 
     public MediaPlayer getMediaPlayer(){

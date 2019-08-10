@@ -10,7 +10,7 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_bar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"
@@ -21,30 +21,29 @@
 
     </android.support.design.widget.BottomNavigationView>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:background="?attr/bg_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navigation_bar"
-        app:layout_constraintVertical_bias="0.111">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+        </android.support.v4.view.ViewPager>
+
+    </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/controller_layout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/card_bg_controller"
         android:orientation="vertical"
-        android:padding="5dp"
-        android:weightSum="1">
+        android:padding="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/controller_song_art"
@@ -67,11 +66,11 @@
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/controller_song_art"
 
-            android:singleLine="true"
             android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:fadingEdge="horizontal"
+            android:singleLine="true"
 
             android:text="No Queued Tracks"
             android:textAlignment="viewStart"
@@ -92,11 +91,11 @@
             android:layout_marginBottom="16dp"
             android:layout_toEndOf="@+id/controller_song_art"
 
-            android:singleLine="true"
             android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:fadingEdge="horizontal"
+            android:singleLine="true"
 
             android:text=""
             android:textAlignment="viewStart"
@@ -150,6 +149,5 @@
             app:srcCompat="@drawable/ic_controller_button_previous" />
 
     </android.support.constraint.ConstraintLayout>
-
 
 </LinearLayout>

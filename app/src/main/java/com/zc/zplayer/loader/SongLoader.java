@@ -5,11 +5,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.zc.zplayer.model.Album;
 import com.zc.zplayer.model.Song;
 
 import java.util.ArrayList;
-
 
 public class SongLoader {
     private final static Uri URI = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;

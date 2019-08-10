@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/controller_layout"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="@drawable/card_bg_controller"
     android:orientation="vertical"
+    android:visibility="visible"
     android:padding="5dp"
     android:weightSum="1">
 
@@ -17,7 +16,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="4dp"
-        android:src="@drawable/music_default_cover_img"
+        android:src="@drawable/ic_default_music"
         app:civ_border_color="#00ffffff"
         app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +36,7 @@
         android:scrollHorizontally="true"
         android:fadingEdge="horizontal"
 
-        android:text="Song Title"
+        android:text="No Queued Tracks"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -62,7 +61,7 @@
         android:scrollHorizontally="true"
         android:fadingEdge="horizontal"
 
-        android:text="Song Artist"
+        android:text=""
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="@color/white"

@@ -10,40 +10,40 @@ import com.zc.zplayer.model.Song;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class StorageUtil {
+import static com.zc.zplayer.util.Constants.AUDIO;
+import static com.zc.zplayer.util.Constants.AUDIO_ARRAY_LIST;
+import static com.zc.zplayer.util.Constants.AUDIO_INDEX;
+import static com.zc.zplayer.util.Constants.KEY_NIGHT_MODE;
+import static com.zc.zplayer.util.Constants.STORAGE_FILE_NAME;
 
-    private final String STORAGE = "com.zc.player.MP_STORAGE_UTIL";
-    private final String KEY_NIGHT_MODE = "NIGHT_MODE";
+public class StorageUtil {
     private SharedPreferences preferences;
-    private Context context;
 
     public StorageUtil(Context context) {
-        preferences = context.getSharedPreferences(STORAGE, Context.MODE_PRIVATE);
-        this.context = context;
+        preferences = context.getSharedPreferences(STORAGE_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     public void storeNightModeState(boolean state){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(KEY_NIGHT_MODE, state);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean loadNightModeState(){
-        Boolean state = preferences.getBoolean(KEY_NIGHT_MODE, false);
-        return state;
+        return preferences.getBoolean(KEY_NIGHT_MODE, false);
     }
 
     public void storeAudioList(ArrayList<Song> arrayList) {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(arrayList);
-        editor.putString("audioArrayList", json);
+        editor.putString(AUDIO_ARRAY_LIST, json);
         editor.apply();
     }
 
     public ArrayList<Song> loadAudioList() {
         Gson gson = new Gson();
-        String json = preferences.getString("audioArrayList", null);
+        String json = preferences.getString(AUDIO_ARRAY_LIST, null);
         Type type = new TypeToken<ArrayList<Song>>() {
         }.getType();
         return gson.fromJson(json, type);
@@ -53,13 +53,13 @@ public class StorageUtil {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(song);
-        editor.putString("audio", json);
+        editor.putString(AUDIO, json);
         editor.apply();
     }
 
     public Song loadAudio(){
         Gson gson = new Gson();
-        String json = preferences.getString("audio", null);
+        String json = preferences.getString(AUDIO, null);
         Type type = new TypeToken<Song>() {
         }.getType();
         return gson.fromJson(json, type);
@@ -67,17 +67,17 @@ public class StorageUtil {
 
     public void storeAudioIndex(int index) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("audioIndex", index);
+        editor.putInt(AUDIO_INDEX, index);
         editor.apply();
     }
 
     public int loadAudioIndex() {
-        return preferences.getInt("audioIndex", -1);//return -1 if no data found
+        return preferences.getInt(AUDIO_INDEX, -1);//return -1 if no data found
     }
 
     public void clearCachedAudioPlaylist() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }
