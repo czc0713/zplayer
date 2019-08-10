@@ -3,7 +3,7 @@ package com.zc.zplayer.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,10 +37,10 @@ public class AlbumFragment extends Fragment {
         albumListView.setNestedScrollingEnabled(true);
 
         adapter = new AlbumAdapter(getContext(), albumList);
-        //albumListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (isGrid){
-            albumListView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        }
+        albumListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        if (isGrid){
+//            albumListView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+//        }
         albumListView.setAdapter(adapter);
 
         return view;

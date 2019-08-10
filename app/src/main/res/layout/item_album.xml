@@ -1,73 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="?attr/bg_color"
-    android:orientation="vertical"
-    android:padding="5dp"
-    android:weightSum="1">
+    android:layout_height="80dp"
+    android:padding="5dp">
 
     <RelativeLayout
         android:id="@+id/item_album_card"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/card_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/card_bg">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/item_album_art"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/ic_default_music"
-            app:civ_border_color="#00ffffff"
-            app:civ_border_width="2dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="5dp" />
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_default_music" />
 
-        <TextView
-            android:id="@+id/item_album_artist"
-            android:layout_width="244dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_album_title"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="9dp"
-            android:layout_toEndOf="@+id/item_album_art"
-            android:fontFamily="sans-serif"
-            android:text="Album Artist"
-            android:textColor="@color/content_text_color"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:translationX="10dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="5dp" />
+            android:layout_marginLeft="100dp"
+            android:paddingTop="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_album_title"
-            android:layout_width="243dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/item_album_art"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="8dp"
-            android:layout_toEndOf="@+id/item_album_art"
-            android:text="Album Title"
-            android:textColor="@color/title_text_color"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:translationX="10dp"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="5dp" />
+            <TextView
+                android:id="@+id/item_album_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Album Title"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/title_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_album_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Album Artist"
+                android:textColor="@color/content_text_color"
+                android:textSize="@dimen/title_small"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

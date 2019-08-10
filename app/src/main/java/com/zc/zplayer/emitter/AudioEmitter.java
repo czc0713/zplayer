@@ -3,12 +3,10 @@ package com.zc.zplayer.emitter;
 import android.content.Context;
 import android.content.Intent;
 
+import static com.zc.zplayer.util.Constants.BROADCAST_NEW_AUDIO;
+import static com.zc.zplayer.util.Constants.BROADCAST_PAUSE_PLAY;
+
 public class AudioEmitter {
-
-    public static String BROADCAST_NEW_AUDIO = "MP_BROADCAST_NEW_AUDIO";
-    public static String BROADCAST_PAUSE_PLAY = "MP_BROADCAST_PAUSE_AUDIO";
-
-
     public static void broadcastNewAudio(Context context){
         Intent broadcastIntent = new Intent(BROADCAST_NEW_AUDIO);
         context.sendBroadcast(broadcastIntent);

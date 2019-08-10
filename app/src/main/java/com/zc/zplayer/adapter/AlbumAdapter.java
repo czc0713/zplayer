@@ -20,7 +20,6 @@ import com.zc.zplayer.loader.SongLoader;
 import com.zc.zplayer.model.Album;
 import com.zc.zplayer.model.SongList;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -52,7 +51,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @NonNull
     @Override
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        view = LayoutInflater.from(context).inflate(R.layout.item_album_card, viewGroup, false);
+        view = LayoutInflater.from(context).inflate(R.layout.item_album, viewGroup, false);
         final AlbumViewHolder holder = new AlbumViewHolder(view);
 
         holder.container.setOnClickListener(new View.OnClickListener() {
@@ -111,11 +110,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
         public AlbumViewHolder(@NonNull View itemView) {
             super(itemView);
-            container = (RelativeLayout) itemView.findViewById(R.id.item_album_card);
-            albumTitleText = (TextView) itemView.findViewById(R.id.item_album_title);
-            albumArtistText = (TextView) itemView.findViewById(R.id.item_album_artist);
-            albumImage = (CircleImageView) itemView.findViewById(R.id.item_album_art);
-
+            container = itemView.findViewById(R.id.item_album_card);
+            albumTitleText = itemView.findViewById(R.id.item_album_title);
+            albumArtistText = itemView.findViewById(R.id.item_album_artist);
+            albumImage = itemView.findViewById(R.id.item_album_art);
         }
 
     }

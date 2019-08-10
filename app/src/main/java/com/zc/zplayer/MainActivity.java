@@ -31,6 +31,8 @@ import com.zc.zplayer.util.StorageUtil;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zc.zplayer.util.Constants.NOW_PLAYING;
+
 public class MainActivity extends ServiceActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView navigationView;
@@ -53,7 +55,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         checkPermissions();
         checkSavedSettings();
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("MUSIC");
+        getSupportActionBar().setTitle("Music");
         setContentView(R.layout.activity_main);
         initializeViews();
         initializeController();

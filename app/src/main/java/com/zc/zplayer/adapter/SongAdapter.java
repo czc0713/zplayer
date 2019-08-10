@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zc.zplayer.util.Constants.NOW_PLAYING;
+
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
 
     private StorageUtil storageUtil;
@@ -31,7 +33,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     private Context context;
     private ArrayList<Song> songList;
     private SongList playlist;
-    public static final String NOW_PLAYING = "NOW_PLAYING_SONG";
 
     public SongAdapter(Context context, ArrayList<Song> songList) {
         this.context = context;

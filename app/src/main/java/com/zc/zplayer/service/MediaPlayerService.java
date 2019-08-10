@@ -1,6 +1,5 @@
 package com.zc.zplayer.service;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -25,15 +24,22 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import com.zc.zplayer.R;
 import com.zc.zplayer.emitter.AudioEmitter;
-import com.zc.zplayer.util.StorageUtil;
 import com.zc.zplayer.model.Song;
+import com.zc.zplayer.util.StorageUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static com.zc.zplayer.util.Constants.ACTION_NEXT;
+import static com.zc.zplayer.util.Constants.ACTION_PAUSE;
+import static com.zc.zplayer.util.Constants.ACTION_PLAY;
+import static com.zc.zplayer.util.Constants.ACTION_PREVIOUS;
+import static com.zc.zplayer.util.Constants.ACTION_STOP;
+import static com.zc.zplayer.util.Constants.BROADCAST_NEW_AUDIO;
+import static com.zc.zplayer.util.Constants.BROADCAST_PAUSE_PLAY;
 
 public class MediaPlayerService extends Service implements
         MediaPlayer.OnCompletionListener,
@@ -43,12 +49,6 @@ public class MediaPlayerService extends Service implements
         MediaPlayer.OnInfoListener,
         MediaPlayer.OnBufferingUpdateListener,
         AudioManager.OnAudioFocusChangeListener {
-
-    public static final String ACTION_PLAY = "com.zc.zplayer.ACTION_PLAY";
-    public static final String ACTION_PAUSE = "com.zc.zplayer.ACTION_PAUSE";
-    public static final String ACTION_PREVIOUS = "com.zc.zplayer.ACTION_PREVIOUS";
-    public static final String ACTION_NEXT = "com.zc.zplayer.ACTION_NEXT";
-    public static final String ACTION_STOP = "com.zc.zplayer.ACTION_STOP";
 
     //MediaSession
     private MediaSessionManager mediaSessionManager;
@@ -129,8 +129,8 @@ public class MediaPlayerService extends Service implements
     }
 
     private void registerReceivers() {
-        registerReceiver(newAudioReceiver, new IntentFilter(AudioEmitter.BROADCAST_NEW_AUDIO));
-        registerReceiver(pausePlayReceiver, new IntentFilter(AudioEmitter.BROADCAST_PAUSE_PLAY));
+        registerReceiver(newAudioReceiver, new IntentFilter(BROADCAST_NEW_AUDIO));
+        registerReceiver(pausePlayReceiver, new IntentFilter(BROADCAST_PAUSE_PLAY));
         registerReceiver(becomingNoisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
     }
 

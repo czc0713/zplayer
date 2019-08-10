@@ -6,17 +6,16 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.zc.zplayer.emitter.AudioEmitter;
 import com.zc.zplayer.service.MediaPlayerService;
 
-public abstract class ServiceActivity extends AppCompatActivity {
+import static com.zc.zplayer.util.Constants.BROADCAST_NEW_AUDIO;
+import static com.zc.zplayer.util.Constants.BROADCAST_PAUSE_PLAY;
 
-    public static final String BROADCAST_PLAY_NEW_AUDIO = "MP_BROADCAST_PLAY_NEW_AUDIO";
-    public static final String NOW_PLAYING = "NOW_PLAYING_SONG";
+public abstract class ServiceActivity extends AppCompatActivity {
     protected MediaPlayerService playerService;
     protected boolean serviceBound = false;
     protected BroadcastReceiver newAudioReciever;
@@ -27,11 +26,11 @@ public abstract class ServiceActivity extends AppCompatActivity {
     protected void registerReceivers(){
         initializeReceiver();
         try{
-            registerReceiver(newAudioReciever, new IntentFilter(AudioEmitter.BROADCAST_NEW_AUDIO));
+            registerReceiver(newAudioReciever, new IntentFilter(BROADCAST_NEW_AUDIO));
         }
         catch (Exception e) {}
         try{
-            registerReceiver(pausePlayReceiver, new IntentFilter(AudioEmitter.BROADCAST_PAUSE_PLAY));
+            registerReceiver(pausePlayReceiver, new IntentFilter(BROADCAST_PAUSE_PLAY));
         }
         catch (Exception e) {}
     }

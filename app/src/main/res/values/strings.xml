@@ -6,7 +6,6 @@
     <!-- String values used by classes -->
     <string name="selected_tracks">SELECTED_TRACKS</string>
 
-
     <string name="title_activity_settings">Settings</string>
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -48,12 +47,5 @@
 
     <string name="title_dark_mode">Enable Night Mode</string>
     <string name="key_dark_mode">key_dark_mode</string>
-
-    <!-- MEDIA PLAYER ACTIONS -->
-    <string name="ACTION_PLAY">ZPLAYER_ACTION_PLAY</string>
-    <string name="ACTION_PAUSE">ZPLAYER_ACTION_PAUSE</string>
-    <string name="ACTION_PREVIOUS">ZPLAYER_ACTION_PREVIOUS</string>
-    <string name="ACTION_NEXT">ZPLAYER_ACTION_NEXT</string>
-    <string name="ACTION_STOP">ZPLAYER_ACTION_STOP</string>
 
 </resources>
