@@ -1,6 +1,7 @@
-package com.zc.zplayer;
+package com.zc.zplayer.ui.activities;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,18 +23,20 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.zc.zplayer.R;
 import com.zc.zplayer.emitter.AudioEmitter;
-import com.zc.zplayer.fragment.AlbumFragment;
-import com.zc.zplayer.fragment.ArtistFragment;
-import com.zc.zplayer.fragment.GenreFragment;
-import com.zc.zplayer.fragment.SongFragment;
-import com.zc.zplayer.fragment.TabAdapter;
+import com.zc.zplayer.ui.fragments.AlbumFragment;
+import com.zc.zplayer.ui.fragments.ArtistFragment;
+import com.zc.zplayer.ui.fragments.GenreFragment;
+import com.zc.zplayer.ui.fragments.SongFragment;
+import com.zc.zplayer.ui.fragments.TabAdapter;
 import com.zc.zplayer.model.Song;
 import com.zc.zplayer.service.MediaPlayerService;
 import com.zc.zplayer.util.StorageUtil;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.zc.zplayer.util.Constants.IS_PLAYING;
 import static com.zc.zplayer.util.Constants.NOW_PLAYING;
 
 public class MainActivity extends ServiceActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -113,7 +116,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
 
     private void checkSavedSettings(){
         storageUtil = new StorageUtil(this);
-        if (storageUtil.loadNightModeState() == true){
+        if (storageUtil.isNightModeState()){
             setTheme(R.style.AppThemeDark);
         }
         else{
@@ -146,10 +149,10 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     private void initializeViews(){
         viewPager = findViewById(R.id.viewPager);
         tabAdapter = new TabAdapter(getSupportFragmentManager());
-        tabAdapter.addFragment(new SongFragment(), "Songs");
-        tabAdapter.addFragment(new AlbumFragment(), "Albums");
-        tabAdapter.addFragment(new ArtistFragment(), "Artists");
-        tabAdapter.addFragment(new GenreFragment(), "Genres");
+        tabAdapter.addFragment(new SongFragment(), getString(R.string.tracks));
+        tabAdapter.addFragment(new AlbumFragment(), getString(R.string.albums));
+        tabAdapter.addFragment(new ArtistFragment(), getString(R.string.artists));
+        tabAdapter.addFragment(new GenreFragment(), getString(R.string.genres));
         viewPager.setAdapter(tabAdapter);
         navigationView = findViewById(R.id.navigation_bar);
         navigationView.setOnNavigationItemSelectedListener(
@@ -197,7 +200,6 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
 
             }
         });
-//        checkSavedSong();
     }
 
     private void initializeController(){
@@ -240,12 +242,11 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (playerService.getActiveAudio() != null){
-                    Intent intent = new Intent(getApplicationContext(), SongActivity.class);
-                    boolean isPlaying = playerService.isPlaying();
-                    intent.putExtra("isPlaying", isPlaying);
-                    startActivity(intent);
-                }
+                //fixme add condition if empty song...
+                Intent intent = new Intent(getApplicationContext(), SongActivity.class);
+                boolean isPlaying = playerService.isPlaying();
+                intent.putExtra(IS_PLAYING, isPlaying);
+                startActivity(intent);
             }
         });
         checkSavedSong();
@@ -276,10 +277,10 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
                 startActivity(intent);
                 break;
             case R.id.item_about:
-                //your action
+                //TODO About screen?
                 break;
             case R.id.item_night_mode:
-                if (storageUtil.loadNightModeState() == false){
+                if (!storageUtil.isNightModeState()){
                     storageUtil.storeNightModeState(true);
                 }
                 else{
@@ -288,7 +289,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
                 recreate();
                 break;
             case R.id.item_search:
-                //your action
+                //TODO Search for music
                 break;
             default:
                 return super.onOptionsItemSelected(item);

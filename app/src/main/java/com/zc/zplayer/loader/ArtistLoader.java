@@ -19,10 +19,8 @@ public class ArtistLoader {
                 MediaStore.Audio.Artists.NUMBER_OF_TRACKS,
                 MediaStore.Audio.Artists.NUMBER_OF_ALBUMS
         };
-        String selection = null;
-        String[] selectionArgs = null;
         String sortOrder = MediaStore.Audio.Artists.ARTIST + " ASC";
-        Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, sortOrder);
+        Cursor cursor = contentResolver.query(uri, projection, null, null, sortOrder);
 
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
@@ -32,8 +30,8 @@ public class ArtistLoader {
                 int nbOfAlbums = cursor.getInt(3);
                 artistList.add(new Artist(id, title, nbOfTracks, nbOfAlbums));
             }
+            cursor.close();
         }
-        cursor.close();
         return artistList;
     }
 }

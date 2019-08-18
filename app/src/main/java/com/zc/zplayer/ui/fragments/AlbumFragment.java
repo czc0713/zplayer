@@ -1,4 +1,4 @@
-package com.zc.zplayer.fragment;
+package com.zc.zplayer.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,13 +27,13 @@ public class AlbumFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.albumList = AlbumLoader.getAlbumList(getActivity().getApplicationContext().getContentResolver());
+        this.albumList = AlbumLoader.getAlbums(getActivity().getApplicationContext().getContentResolver());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_albums, container, false);
-        albumListView = (RecyclerView) view.findViewById(R.id.album_list);
+        albumListView = view.findViewById(R.id.album_list);
         albumListView.setNestedScrollingEnabled(true);
 
         adapter = new AlbumAdapter(getContext(), albumList);

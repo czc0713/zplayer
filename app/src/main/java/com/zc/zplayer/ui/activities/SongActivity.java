@@ -1,4 +1,4 @@
-package com.zc.zplayer;
+package com.zc.zplayer.ui.activities;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -17,12 +17,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;;
+import com.zc.zplayer.R;
 import com.zc.zplayer.emitter.AudioEmitter;
 import com.zc.zplayer.model.Song;
 import com.zc.zplayer.service.MediaPlayerService;
 import com.zc.zplayer.util.FormatTimeUtil;
-import java.util.ArrayList;
+
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+import static com.zc.zplayer.util.Constants.IS_PLAYING;
 
 public class SongActivity extends ServiceActivity {
 
@@ -38,7 +40,6 @@ public class SongActivity extends ServiceActivity {
     private SeekBar seekBar;
     private ConstraintLayout constraintLayout;
     private Thread updateSeekBar;
-    private ArrayList<Song> songList;
     private FormatTimeUtil formatTimeUtil;
 
     @Override
@@ -46,19 +47,19 @@ public class SongActivity extends ServiceActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_song);
-        title = (TextView) findViewById(R.id.current_song_title);
+        title = findViewById(R.id.current_song_title);
         title.setSelected(true);
-        artist = (TextView) findViewById(R.id.current_song_artist);
-        albumArt = (CircleImageView) findViewById(R.id.current_song_art);
-        pauseButton = (ImageButton) findViewById(R.id.button_pause);
-        prevButton = (ImageButton) findViewById(R.id.button_previous);
-        nextButton = (ImageButton) findViewById(R.id.button_next);
-        seekBar = (SeekBar) findViewById(R.id.seek_bar);
-        songDuration = (TextView) findViewById(R.id.song_duration);
-        songElapsedTime = (TextView) findViewById(R.id.song_elapsed_time);
-        constraintLayout = (ConstraintLayout) findViewById(R.id.song_layout);
+        artist = findViewById(R.id.current_song_artist);
+        albumArt = findViewById(R.id.current_song_art);
+        pauseButton = findViewById(R.id.button_pause);
+        prevButton = findViewById(R.id.button_previous);
+        nextButton = findViewById(R.id.button_next);
+        seekBar = findViewById(R.id.seek_bar);
+        songDuration = findViewById(R.id.song_duration);
+        songElapsedTime = findViewById(R.id.song_elapsed_time);
+        constraintLayout = findViewById(R.id.song_layout);
         formatTimeUtil = new FormatTimeUtil();
-        boolean isPlaying = (Boolean) getIntent().getBooleanExtra("isPlaying", false);
+        boolean isPlaying = getIntent().getBooleanExtra(IS_PLAYING, false);
         if (!isPlaying){
             pauseButton.setImageResource(R.drawable.ic_controller_button_play);
         }

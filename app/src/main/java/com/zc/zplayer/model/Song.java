@@ -16,10 +16,10 @@ public class Song implements Parcelable {
     private String songArtist;
     private long songAlbumID;
     private int duration;
-    private String track;
+    private int track;
     private final String ALBUM_PATH = "content://media/external/audio/albumart";
 
-    public Song(long id, String data, String songTitle, String songAlbum, String songArtist, long songAlbumID, int duration, String track) {
+    public Song(long id, String data, String songTitle, String songAlbum, String songArtist, long songAlbumID, int duration, int track) {
         this.id = id;
         this.data = data;
         this.songTitle = songTitle;
@@ -38,7 +38,7 @@ public class Song implements Parcelable {
         songArtist = in.readString();
         songAlbumID = in.readLong();
         duration = in.readInt();
-        track = in.readString();
+        track = in.readInt();
     }
 
     public static final Creator<Song> CREATOR = new Creator<Song>() {
@@ -101,11 +101,11 @@ public class Song implements Parcelable {
         return duration;
     }
 
-    public String getTrack() {
+    public int getTrack() {
         return track;
     }
 
-    public void setTrack(String track) {
+    public void setTrack(int track) {
         this.track = track;
     }
 
@@ -131,7 +131,6 @@ public class Song implements Parcelable {
         dest.writeString(this.songArtist);
         dest.writeLong(this.songAlbumID);
         dest.writeInt(this.duration);
-        dest.writeString(this.track);
+        dest.writeInt(this.track);
     }
-
 }

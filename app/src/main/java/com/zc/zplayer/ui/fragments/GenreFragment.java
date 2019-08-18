@@ -1,4 +1,4 @@
-package com.zc.zplayer.fragment;
+package com.zc.zplayer.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +22,7 @@ public class GenreFragment extends Fragment {
     private RecyclerView genreListView;
     private ArrayList<Genre> genreList;
     private ConstraintLayout rootLayout;
+    private GenreAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class GenreFragment extends Fragment {
         genreListView = view.findViewById(R.id.genre_list);
         rootLayout = view.findViewById(R.id.container_genres);
         genreListView.setNestedScrollingEnabled(true);
-        GenreAdapter adapter = new GenreAdapter(getContext(), genreList);
+        adapter = new GenreAdapter(getContext(), genreList);
         genreListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         genreListView.setAdapter(adapter);
         return view;

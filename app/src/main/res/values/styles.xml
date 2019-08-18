@@ -15,10 +15,9 @@
 
         <item name="bg_color">@color/white</item>
         <item name="card_bg_color">@color/card_bg_color</item>
+        <item name="card_bg_fragment_color">@color/white</item>
         <item name="card_text_color">@color/title_text_color</item>
         <item name="card_content_color">@color/light_grey</item>
-
-
     </style>
 
     <!-- DARK THEME -->
@@ -37,9 +36,9 @@
 
         <item name="bg_color">@color/black</item>
         <item name="card_bg_color">@color/card_bg_color_dark</item>
+        <item name="card_bg_fragment_color">@color/black</item>
         <item name="card_text_color">@color/title_text_color</item>
         <item name="card_content_color">@color/light_grey</item>
-
     </style>
 
     <style name="WindowAnimationTransition">
@@ -70,7 +69,8 @@
     <style name="AlbumTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>

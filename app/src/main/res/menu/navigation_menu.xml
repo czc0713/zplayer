@@ -4,31 +4,31 @@
     <item
         android:id="@+id/item_songs"
         android:icon="@drawable/music_tab_icon_all_press"
-        android:title="Tracks"
+        android:title="@string/tracks"
         android:titleCondensed="string" />
 
     <item
         android:id="@+id/item_albums"
         android:icon="@drawable/music_tab_icon_albums_press"
-        android:title="Albums"
+        android:title="@string/albums"
         android:titleCondensed="string" />
 
     <item
         android:id="@+id/item_artists"
         android:icon="@drawable/music_tab_icon_artists_press"
-        android:title="Artists"
+        android:title="@string/artists"
         android:titleCondensed="string" />
 
     <item
         android:id="@+id/item_genres"
         android:icon="@drawable/music_tab_icon_genres_press"
-        android:title="Genres"
+        android:title="@string/genres"
         android:titleCondensed="string" />
 
     <item
         android:id="@+id/item_playlists"
         android:icon="@drawable/music_tab_icon_playlists_press"
-        android:title="Playlists"
+        android:title="@string/playlists"
         android:titleCondensed="string" />
 
 </menu>

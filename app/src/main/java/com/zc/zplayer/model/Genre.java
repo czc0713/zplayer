@@ -4,18 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Genre implements Parcelable {
-    private long id;
+    private int id;
     private int count;
     private String genreTitle;
 
-    public Genre(long id, int count, String genreTitle) {
+    public Genre(int id, String genreTitle, int count) {
         this.id = id;
         this.count = count;
         this.genreTitle = genreTitle;
     }
 
-    protected Genre(Parcel in) {
-        id = in.readLong();
+    private Genre(Parcel in) {
+        id = in.readInt();
         count = in.readInt();
         genreTitle = in.readString();
     }
@@ -32,11 +32,11 @@ public class Genre implements Parcelable {
         }
     };
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

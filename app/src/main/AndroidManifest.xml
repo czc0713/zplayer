@@ -18,7 +18,7 @@
         <service android:name=".service.MediaPlayerService" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,22 +27,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SongActivity"
+            android:name=".ui.activities.SongActivity"
             android:theme="@style/SongTheme" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.activities.SettingsActivity"
             android:label="@string/action_settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.MainActivity" />
         </activity>
-        <activity android:name=".AlbumActivity"
-            android:theme="@style/AlbumTheme">
+        <activity
+            android:name=".ui.activities.AlbumActivity"
+            android:theme="@style/AlbumTheme"></activity>
+        <activity android:name=".ui.activities.GenreActivity">
 
         </activity>
-        <activity android:name=".ServiceActivity" />
+        <activity android:name=".ui.activities.ServiceActivity" />
     </application>
 
 </manifest>

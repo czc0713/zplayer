@@ -48,4 +48,20 @@
     <string name="title_dark_mode">Enable Night Mode</string>
     <string name="key_dark_mode">key_dark_mode</string>
 
+    <!-- DEFAULT STRINGS FOR LAYOUTS -->
+    <string name="album_title">Album Title</string>
+    <string name="album_artist">Album Artist</string>
+    <string name="song_title">Song Title</string>
+    <string name="song_album">Song Album</string>
+    <string name="song_artist">Song Artist</string>
+    <string name="song_duration">0:00</string>
+    <string name="song_number">00</string>
+
+    <!-- MENU STRINGS -->
+    <string name="tracks">Tracks</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="genres">Genres</string>
+    <string name="playlists">Playlists</string>
+
 </resources>

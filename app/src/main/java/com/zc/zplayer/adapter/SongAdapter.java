@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zc.zplayer.R;
-import com.zc.zplayer.model.SongList;
 import com.zc.zplayer.model.Song;
 import com.zc.zplayer.util.StorageUtil;
 
@@ -32,7 +31,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     private View view;
     private Context context;
     private ArrayList<Song> songList;
-    private SongList playlist;
 
     public SongAdapter(Context context, ArrayList<Song> songList) {
         this.context = context;
@@ -52,7 +50,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 int index = holder.getAdapterPosition();
                 Song songPicked = songList.get(index);
                 // store song picked
-                storageUtil.storeAudio(songPicked);
+//                storageUtil.storeAudio(songPicked);
                 storageUtil.storeAudioList(songList);
                 storageUtil.storeAudioIndex(index);
                 Intent intent = new Intent(NOW_PLAYING);
@@ -92,11 +90,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
         public SongViewHolder(@NonNull View itemView) {
             super(itemView);
-            container = (RelativeLayout) itemView.findViewById(R.id.item_song_card);
-            titleText = (TextView) itemView.findViewById(R.id.item_album_title);
-            artistText = (TextView) itemView.findViewById(R.id.item_song_artist);
-            albumText = (TextView) itemView.findViewById(R.id.item_song_album);
-            albumImage = (CircleImageView) itemView.findViewById(R.id.item_album_art);
+            container = itemView.findViewById(R.id.item_song_card);
+            titleText = itemView.findViewById(R.id.item_album_title);
+            artistText = itemView.findViewById(R.id.item_song_artist);
+            albumText = itemView.findViewById(R.id.item_song_album);
+            albumImage = itemView.findViewById(R.id.item_album_art);
         }
     }
 }

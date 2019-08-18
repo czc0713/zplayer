@@ -1,4 +1,4 @@
-package com.zc.zplayer;
+package com.zc.zplayer.ui.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

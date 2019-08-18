@@ -191,7 +191,6 @@ public class MediaPlayerService extends Service implements
         player.prepareAsync();
     }
 
-
     // PLAY NEXT SONG!!!//////////////////
     @Override
     public void onCompletion(MediaPlayer mp) {
@@ -466,6 +465,7 @@ public class MediaPlayerService extends Service implements
             play_pauseAction = playbackAction(0);
         }
 
+        //TODO Add close button and change background to album cover
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "notifty_id")
                 .setShowWhen(false)
                 .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle()

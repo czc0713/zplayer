@@ -9,6 +9,12 @@ public interface Constants {
     String AUDIO_ARRAY_LIST = "audio_array_list";
     String AUDIO_INDEX = "audio_index";
 
+    // INTENT CONSTANTS
+    String SELECTED_TRACKS = "selected_tracks";
+    String SELECTED_ALBUM = "selected_album";
+    String SELECTED_GENRE = "selected_genre";
+    String IS_PLAYING = "is_playing";
+
     // EMITTERS CONSTANTS
     String NOW_PLAYING = "now_playing";
     String BROADCAST_NEW_AUDIO = "broadcast_new_audio";

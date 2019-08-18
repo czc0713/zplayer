@@ -14,15 +14,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.zc.zplayer.AlbumActivity;
+import com.zc.zplayer.ui.activities.AlbumActivity;
 import com.zc.zplayer.R;
-import com.zc.zplayer.loader.SongLoader;
 import com.zc.zplayer.model.Album;
-import com.zc.zplayer.model.SongList;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.zc.zplayer.util.Constants.SELECTED_ALBUM;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
@@ -58,23 +58,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
             @Override
             public void onClick(View v) {
                 int index = holder.getAdapterPosition();
-                Album album = albumList.get(index);
-                SongList albumPlaylist = new SongList();
-
-                /*
-                ArrayList<Song> songList = SongLoader
-                        .getSongListFromAlbum(context.getContentResolver(), album.getId());
-                        */
-
-
-                albumPlaylist.setSongs(SongLoader
-                        .getSongListFromAlbum(context.getContentResolver(), album.getId()));
+                Album selectedAlbum = albumList.get(index);
                 Intent intent = new Intent(context, AlbumActivity.class);
-                intent.putExtra("selected_tracks", albumPlaylist);
-
-
-                //Intent intent = new Intent(context, AlbumActivity.class);
-                //intent.putParcelableArrayListExtra("SELECTED_TRACKS", songList);
+                intent.putExtra(SELECTED_ALBUM, selectedAlbum);
                 context.startActivity(intent);
             }
         });
@@ -89,7 +75,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         albumViewHolder.container.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale));
 
         Glide.with(view)
-                .load(albumList.get(i).getAlbumID())
+                .load(albumList.get(i).getAlbumArt())
                 .placeholder(R.drawable.music_default_cover_img)
                 .apply(RequestOptions.skipMemoryCacheOf(true))
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
@@ -117,5 +103,4 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         }
 
     }
-
 }

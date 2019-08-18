@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:background="?attr/bg_color"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_bar"
@@ -30,7 +30,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/bg_color">
+            android:background="@color/colorPrimaryDark">
 
         </android.support.v4.view.ViewPager>
 
@@ -53,8 +53,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="4dp"
             android:src="@drawable/ic_default_music"
-            app:civ_border_color="#00ffffff"
-            app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -3,4 +3,12 @@
     <dimen name="title_medium">16sp</dimen>
     <dimen name="title_small">14sp</dimen>
     <dimen name="title_ssmall">12sp</dimen>
+
+    <dimen name="spacing_small">5dp</dimen>
+    <dimen name="spacing_medium">10dp</dimen>
+    <dimen name="spacing_large">15dp</dimen>
+
+    <dimen name="radius_medium">16dp</dimen>
+    <dimen name="radius_large">20dp</dimen>
+
 </resources>

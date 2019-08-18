@@ -1,4 +1,4 @@
-package com.zc.zplayer.fragment;
+package com.zc.zplayer.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.zc.zplayer.fragment;
+package com.zc.zplayer.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,7 +26,7 @@ public class SongFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.songList = SongLoader.getSongList(getActivity().getApplicationContext().getContentResolver());
+        this.songList = SongLoader.getSongs(getActivity().getApplicationContext().getContentResolver());
     }
 
     @Override

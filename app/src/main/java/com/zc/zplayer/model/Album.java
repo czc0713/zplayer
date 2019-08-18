@@ -63,11 +63,11 @@ public class Album implements Parcelable {
         this.albumArtist = albumArtist;
     }
 
-    public String getAlbumID() {
+    public String getAlbumArt() {
         return albumID;
     }
 
-    public void setAlbumID(String albumID) {
+    public void setAlbumArt(String albumID) {
         this.albumID = albumID;
     }
 

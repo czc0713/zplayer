@@ -32,8 +32,8 @@ public class PlaylistLoader {
                 String name = cursor.getString(3);
                 playlistArray.add(new Playlist(id, count, data, name));
             }
+            cursor.close();
         }
-        cursor.close();
         return playlistArray;
     }
 }

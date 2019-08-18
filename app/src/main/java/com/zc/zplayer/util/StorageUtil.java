@@ -29,7 +29,7 @@ public class StorageUtil {
         editor.apply();
     }
 
-    public boolean loadNightModeState(){
+    public boolean isNightModeState(){
         return preferences.getBoolean(KEY_NIGHT_MODE, false);
     }
 

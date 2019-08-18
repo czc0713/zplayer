@@ -1,4 +1,4 @@
-package com.zc.zplayer;
+package com.zc.zplayer.ui.activities;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;

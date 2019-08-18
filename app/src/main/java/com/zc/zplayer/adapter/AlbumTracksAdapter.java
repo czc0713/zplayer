@@ -3,6 +3,7 @@ package com.zc.zplayer.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import java.util.List;
 public class AlbumTracksAdapter extends RecyclerView.Adapter<AlbumTracksAdapter.TracksViewHolder> {
 
     private View view;
-    private RecyclerView tracksView;
     private Context context;
     private List<Song> trackList;
     private FormatTimeUtil formatTimeUtil;
@@ -38,10 +38,12 @@ public class AlbumTracksAdapter extends RecyclerView.Adapter<AlbumTracksAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TracksViewHolder tracksViewHolder, int i) {
-        tracksViewHolder.trackTitle.setText(trackList.get(i).getSongTitle());
-        String songDuration = formatTimeUtil.stringForTime(trackList.get(i).getDuration());
+        Song track = trackList.get(i);
+        tracksViewHolder.trackTitle.setText(track.getSongTitle());
+        String songDuration = formatTimeUtil.stringForTime(track.getDuration());
         tracksViewHolder.trackDuration.setText(songDuration);
-        tracksViewHolder.trackNo.setText(trackList.get(i).getTrack());
+        Log.d("TRACK NO. ", "" + track.getTrack());
+        tracksViewHolder.trackNo.setText(String.valueOf(track.getTrack()));
     }
 
     @Override
@@ -58,9 +60,7 @@ public class AlbumTracksAdapter extends RecyclerView.Adapter<AlbumTracksAdapter.
             super(itemView);
             trackTitle = itemView.findViewById(R.id.item_track_title);
             trackNo = itemView.findViewById(R.id.item_track_no);
-            trackDuration = itemView.findViewById(R.id.item_album_title);
-
-
+            trackDuration = itemView.findViewById(R.id.item_track_duration);
         }
     }
 }
