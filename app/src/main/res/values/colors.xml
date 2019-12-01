@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6f6867</color>
-    <color name="colorPrimaryDark">#4e4d4e</color>
-    <color name="colorAccent">#df413f</color>
+    <color name="colorPrimary">#243E53</color>
+    <color name="colorPrimaryDark">#243E53</color>
+    <color name="colorPrimaryLight">#427BA6</color>
+
+    <color name="colorAccent">#ffffff</color>
 
     <color name="greenlime">#c0ff00</color>
 
+    <!-- basic colors -->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="orange">#ff8b38</color>
+
+    <!-- recycler view item colors -->
+    <color name="item_background_color">@color/black</color>
+    <color name="item_divider_color">@color/dark_grey</color>
+    <color name="item_circle_border_inactive">@color/white</color>
+    <color name="item_circle_border_active">@color/orange</color>
 
     <color name="card_bg_color">#f6f6f6</color>
     <color name="card_bg_color_dark">#0e0e0e</color>

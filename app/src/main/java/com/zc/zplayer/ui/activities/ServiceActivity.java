@@ -8,9 +8,10 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 
 import com.zc.zplayer.service.MediaPlayerService;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.zc.zplayer.util.Constants.BROADCAST_NEW_AUDIO;
 import static com.zc.zplayer.util.Constants.BROADCAST_PAUSE_PLAY;

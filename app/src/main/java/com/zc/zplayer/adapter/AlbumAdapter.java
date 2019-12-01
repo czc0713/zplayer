@@ -2,8 +2,6 @@ package com.zc.zplayer.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +12,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.zc.zplayer.ui.activities.AlbumActivity;
 import com.zc.zplayer.R;
 import com.zc.zplayer.model.Album;
+import com.zc.zplayer.ui.activities.AlbumActivity;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zc.zplayer.util.Constants.SELECTED_ALBUM;

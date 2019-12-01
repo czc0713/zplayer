@@ -1,8 +1,6 @@
 package com.zc.zplayer.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +12,9 @@ import com.zc.zplayer.model.Song;
 import com.zc.zplayer.util.FormatTimeUtil;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AlbumTracksAdapter extends RecyclerView.Adapter<AlbumTracksAdapter.TracksViewHolder> {
 

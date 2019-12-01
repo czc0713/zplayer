@@ -1,7 +1,6 @@
 package com.zc.zplayer.ui.activities;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,31 +8,30 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.zc.zplayer.R;
 import com.zc.zplayer.emitter.AudioEmitter;
+import com.zc.zplayer.model.Song;
+import com.zc.zplayer.service.MediaPlayerService;
 import com.zc.zplayer.ui.fragments.AlbumFragment;
 import com.zc.zplayer.ui.fragments.ArtistFragment;
 import com.zc.zplayer.ui.fragments.GenreFragment;
 import com.zc.zplayer.ui.fragments.SongFragment;
 import com.zc.zplayer.ui.fragments.TabAdapter;
-import com.zc.zplayer.model.Song;
-import com.zc.zplayer.service.MediaPlayerService;
 import com.zc.zplayer.util.StorageUtil;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.zc.zplayer.util.Constants.IS_PLAYING;
@@ -55,31 +53,17 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     private CircleImageView mImage;
     private ConstraintLayout controllerLayout;
     private Song audioSong;
-    private RefWatcher refWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        // Normal app init code...
-        refWatcher = LeakCanary.install(getApplication());
         checkPermissions();
-        checkSavedSettings();
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Music");
         setContentView(R.layout.activity_main);
         initializeViews();
         initializeController();
         registerReceivers();
         LocalBroadcastManager.getInstance(this).registerReceiver(mAudioReceiver,
                 new IntentFilter(NOW_PLAYING));
-    }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        MainActivity application = (MainActivity) context.getApplicationContext();
-        return application.refWatcher;
     }
 
     @Override
@@ -93,10 +77,9 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         pausePlayReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (playerService.isPlaying()){
+                if (playerService.isPlaying()) {
                     mPauseButton.setImageResource(R.drawable.ic_controller_button_pause);
-                }
-                else{
+                } else {
                     mPauseButton.setImageResource(R.drawable.ic_controller_button_play);
                 }
             }
@@ -106,7 +89,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
     public BroadcastReceiver mAudioReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (serviceBound){
+            if (serviceBound) {
                 startService(new Intent(getApplicationContext(), MediaPlayerService.class));
                 AudioEmitter.broadcastNewAudio(getApplicationContext());
             }
@@ -114,24 +97,15 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         }
     };
 
-    private void checkSavedSettings(){
+    private void checkSavedSong() {
         storageUtil = new StorageUtil(this);
-        if (storageUtil.isNightModeState()){
-            setTheme(R.style.AppThemeDark);
-        }
-        else{
-            setTheme(R.style.AppTheme);
-        }
-    }
-
-    private void checkSavedSong(){
         audioSong = storageUtil.loadAudio();
-        if (audioSong != null){
+        if (audioSong != null) {
             updateControllerView(audioSong);
         }
     }
 
-    private void checkPermissions(){
+    private void checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -146,7 +120,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         }
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         viewPager = findViewById(R.id.viewPager);
         tabAdapter = new TabAdapter(getSupportFragmentManager());
         tabAdapter.addFragment(new SongFragment(), getString(R.string.tracks));
@@ -181,14 +155,14 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         );
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int i, float v, int i1) { }
+            public void onPageScrolled(int i, float v, int i1) {
+            }
 
             @Override
             public void onPageSelected(int position) {
-                if (prevMenuItem != null){
+                if (prevMenuItem != null) {
                     prevMenuItem.setChecked(false);
-                }
-                else{
+                } else {
                     navigationView.getMenu().getItem(0).setChecked(false);
                 }
                 navigationView.getMenu().getItem(position).setChecked(true);
@@ -202,7 +176,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         });
     }
 
-    private void initializeController(){
+    private void initializeController() {
         controllerLayout = findViewById(R.id.controller_layout);
         mSongTitle = findViewById(R.id.controller_song_title);
         mArtistTitle = findViewById(R.id.controller_song_artist);
@@ -215,11 +189,10 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (playerService.isPlaying()){
+                if (playerService.isPlaying()) {
                     playerService.pauseMedia();
                     AudioEmitter.broadcastPausePlay(getApplicationContext());
-                }
-                else{
+                } else {
                     playerService.playMedia();
                     AudioEmitter.broadcastPausePlay(getApplicationContext());
                 }
@@ -252,7 +225,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         checkSavedSong();
     }
 
-    private void updateControllerView(Song song){
+    private void updateControllerView(Song song) {
         if (song != null) {
             mSongTitle.setText(song.getSongTitle());
             mArtistTitle.setText(song.getSongArtist());
@@ -271,7 +244,7 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.item_settings:
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
@@ -280,10 +253,9 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
                 //TODO About screen?
                 break;
             case R.id.item_night_mode:
-                if (!storageUtil.isNightModeState()){
+                if (!storageUtil.isNightModeState()) {
                     storageUtil.storeNightModeState(true);
-                }
-                else{
+                } else {
                     storageUtil.storeNightModeState(false);
                 }
                 recreate();
@@ -302,11 +274,4 @@ public class MainActivity extends ServiceActivity implements NavigationView.OnNa
         return false;
     }
 
-    @Override
-    public void recreate(){
-        finish();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        startActivity(getIntent());
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
 }

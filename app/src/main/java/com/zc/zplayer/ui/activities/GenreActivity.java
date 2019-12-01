@@ -1,10 +1,6 @@
 package com.zc.zplayer.ui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.zc.zplayer.R;
@@ -14,6 +10,10 @@ import com.zc.zplayer.model.Album;
 import com.zc.zplayer.model.Genre;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.zc.zplayer.util.Constants.SELECTED_GENRE;
 
